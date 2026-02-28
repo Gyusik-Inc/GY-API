@@ -10,6 +10,16 @@ public class MathUtil {
         return Math.random() * 100 >= percent;
     }
 
+    public static boolean chanceByLevel(int level, int[] chances) {
+        if (level <= 0 || level > chances.length) return false;
+        return chance(chances[level - 1]);
+    }
+
+    public static boolean chanceByLevelSmooth(int level, int maxLevel, double baseChance) {
+        double chance = baseChance * (level / (double) maxLevel);
+        return chance(chance);
+    }
+
     public static String formatTime(double seconds) {
         if (seconds < 60) {
             return String.format("%.1f сек.", seconds);
