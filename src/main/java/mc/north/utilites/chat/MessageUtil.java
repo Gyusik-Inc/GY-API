@@ -61,6 +61,7 @@ public class MessageUtil {
         return colorize(mainColor + message);
     }
 
+
     public void sendMessage(CommandSender sender, String message) {
         sender.sendMessage(colorize(prefix + message));
     }
@@ -86,6 +87,14 @@ public class MessageUtil {
 
     public void sendCooldownMessage(Player player, long time) {
         sendMessage(player, "Подождите ещё " + mainColor + MathUtil.formatTime(time));
+    }
+
+    public void sendItemBar(Player player, String message, String name) {
+        sendItemBar(player, message, name, 1);
+    }
+
+    public void sendItemBar(Player player, String message, String name, int priority) {
+        sendActionBar(player, name + " &8» &f" + message, false, priority);
     }
 
     public void sendActionBar(Player player, String message, boolean usePrefix) {
@@ -174,4 +183,43 @@ public class MessageUtil {
         return result.toString();
     }
 
+    public static String getPrefixColors(String text) {
+        if (text == null || text.isEmpty()) {
+            return "";
+        }
+
+        String coloredText = colorize(text);
+        StringBuilder prefixColors = new StringBuilder();
+
+        for (int i = 0; i < coloredText.length(); i++) {
+            char c = coloredText.charAt(i);
+
+            if (c == '§' && i + 1 < coloredText.length()) {
+                char nextChar = coloredText.charAt(i + 1);
+                if ("0123456789abcdefklmnorxABCDEFKLMNORX".indexOf(nextChar) != -1) {
+                    if (nextChar == 'x' || nextChar == 'X') {
+                        if (i + 13 < coloredText.length()) {
+                            prefixColors.append(coloredText, i, i + 14);
+                            i += 13;
+                            continue;
+                        }
+                    } else {
+                        prefixColors.append(coloredText, i, i + 2);
+                        i++;
+                        continue;
+                    }
+                }
+            }
+
+            if (!Character.isWhitespace(c) && c != '§') {
+                break;
+            }
+
+            if (c != '§') {
+                prefixColors.append(c);
+            }
+        }
+
+        return prefixColors.toString();
+    }
 }
