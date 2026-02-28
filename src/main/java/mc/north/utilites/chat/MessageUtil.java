@@ -97,6 +97,14 @@ public class MessageUtil {
         sendActionBar(player, name + " &8» &f" + message, false, priority);
     }
 
+    public void sendTitle(Player player, String message, String name) {
+        player.sendTitle(colorize(mainColor + name), colorize(message), 10, 10, 10);
+    }
+
+    public void sendEnchantBar(Player player, String message, String name) {
+        sendActionBar(player, mainColor + name + " &8» &f" + message, false, 1);
+    }
+
     public void sendActionBar(Player player, String message, boolean usePrefix) {
         sendActionBar(player, message, usePrefix, 1);
     }
