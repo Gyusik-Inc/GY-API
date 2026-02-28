@@ -1,0 +1,6 @@
+name: GY-API
+version: '1.0.0'
+main: mc.north.GYAPI
+api-version: '1.21'
+prefix: GY-API
+authors: [ Gyusik, YouLow_Skill ]
