@@ -37,10 +37,6 @@ publishing {
     }
 }
 
-jar {
-    destinationDirectory = file('C:/GT/Server 1.21.4/plugins')
-}
-
 tasks {
     runServer {
         minecraftVersion("1.21")
