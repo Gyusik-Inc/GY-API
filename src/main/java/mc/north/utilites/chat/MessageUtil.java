@@ -43,6 +43,8 @@ public class MessageUtil {
         return prefix;
     }
 
+    public void sendTestMessage() {}
+
     public void sendMessage(CommandSender sender, String message) {
         sender.sendMessage(colorize(prefix + message));
     }

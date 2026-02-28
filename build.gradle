@@ -9,6 +9,7 @@ version = '1.0.0'
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
     maven {
         name = "papermc-repo"
         url = "https://repo.papermc.io/repository/maven-public/"
@@ -17,6 +18,7 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
+    implementation 'com.github.Gyusik-Inc:GY-API:v1.0.0'
     compileOnly('org.projectlombok:lombok:1.18.38')
     annotationProcessor('org.projectlombok:lombok:1.18.38')
 }
