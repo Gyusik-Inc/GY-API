@@ -43,7 +43,9 @@ public class MessageUtil {
         return prefix;
     }
 
-    public void sendTestMessage() {}
+    public String getGYString(String message) {
+        return colorize(prefix + message);
+    }
 
     public void sendMessage(CommandSender sender, String message) {
         sender.sendMessage(colorize(prefix + message));
