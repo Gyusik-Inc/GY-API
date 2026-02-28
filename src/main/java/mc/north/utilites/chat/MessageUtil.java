@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 public class MessageUtil {
 
     private String prefix;
+    private String mainColor;
     private static final long PRIORITY_TIMEOUT = 1500;
     private static final Pattern HEX_PATTERN = Pattern.compile("&?#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})");
     private final Map<UUID, PriorityData> currentPriority = new HashMap<>();
@@ -31,8 +32,9 @@ public class MessageUtil {
         }
     }
 
-    public MessageUtil(String prefix) {
+    public MessageUtil(String prefix, String mainColor) {
         setPrefix(prefix);
+        setMainColor(mainColor);
     }
 
     public void setPrefix(String prefix) {
@@ -43,12 +45,28 @@ public class MessageUtil {
         return prefix;
     }
 
+    public void setMainColor(String mainColor) {
+        this.mainColor = colorize(mainColor);
+    }
+
+    public String getMainColor() {
+        return mainColor;
+    }
+
     public String getGYString(String message) {
         return colorize(prefix + message);
     }
 
+    public String getMainColorString(String message) {
+        return colorize(mainColor + message);
+    }
+
     public void sendMessage(CommandSender sender, String message) {
         sender.sendMessage(colorize(prefix + message));
+    }
+
+    public void sendMainColorMessage(CommandSender sender, String message) {
+        sender.sendMessage(colorize(mainColor + message));
     }
 
     public void sendPermissionMessage(CommandSender sender) {
@@ -57,17 +75,17 @@ public class MessageUtil {
     }
 
     public void sendUnknownPlayerMessage(CommandSender sender, String unkPlayer) {
-        sendMessage(sender, "Игрок '" + unkPlayer + "' не найден.");
+        sendMessage(sender, "Игрок '" + mainColor + unkPlayer + "&f' не найден.");
         playErrorSound(sender);
     }
 
     public void sendUsageMessage(CommandSender sender, String command) {
-        sendMessage(sender, "Использование: " + command);
+        sendMessage(sender, "Использование: " + mainColor + command);
         playErrorSound(sender);
     }
 
     public void sendCooldownMessage(Player player, long time) {
-        sendMessage(player, "Подождите ещё " + MathUtil.formatTime(time));
+        sendMessage(player, "Подождите ещё " + mainColor + MathUtil.formatTime(time));
     }
 
     public void sendActionBar(Player player, String message, boolean usePrefix) {

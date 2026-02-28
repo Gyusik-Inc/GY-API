@@ -76,7 +76,7 @@ public class CommandManager {
                 return true;
             }
 
-            if (annotation.cooldown() > 0) {
+            if (annotation.cooldown() > 0 && !(sender instanceof Player p && p.hasPermission("gy-api.admin"))) {
                 String key = getCooldownKey(sender);
                 Long lastUse = cooldowns.get(key);
                 if (lastUse != null) {
